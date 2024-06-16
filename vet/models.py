@@ -11,8 +11,12 @@ class Consultation(models.Model):
 
 class Disease(models.Model):
     name = models.CharField(max_length=50)
+    affected_animal = models.ManyToManyField(Race)
 
 
 class Medication(models.Model):
     name = models.CharField(max_length=50)
     affected_animal = models.ManyToManyField(Race)
+
+    def __str__(self):
+        return self.name
