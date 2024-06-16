@@ -22,8 +22,14 @@ class Pet(models.Model):
     sex = models.IntegerField(choices=Sex.choices, default=Sex.MALE)
     is_castrated = models.BooleanField()
 
+    def __str__(self):
+        return self.name
+
 
 class PetWeight(models.Model):
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
     weight = models.IntegerField()
     date = models.DateField()
+
+    def __str__(self):
+        return f'{self.pet} - {self.weight}g at {self.date}'
