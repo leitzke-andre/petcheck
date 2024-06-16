@@ -1,0 +1,12 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <h1>{{ object.name }}</h1>
+    <p>
+        <strong>Race:</strong> {{ object.race }}<br>
+        <strong>Breed:</strong> {{ object.breed }}<br>
+        <strong>Birth Date:</strong> {{ object.birth_date }}<br>
+        <strong>Sex:</strong> {{ object.get_sex_display }}<br>
+        <strong>Castrated:</strong> {{ object.is_castrated }}<br>
+    </p>
+{% endblock %}

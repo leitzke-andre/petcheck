@@ -1,0 +1,10 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <h1>Pet List</h1>
+    <ul>
+    {% for pet in pets %}
+        <li><a href="{{ pet.get_absolute_url }}">{{ pet.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}
