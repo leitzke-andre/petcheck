@@ -1,22 +1,24 @@
 from django.db import models
 
 
-# Create your models here.
-class Race(models.IntegerChoices):
-    CAT = 1, 'Cat'
-    DOG = 2, 'Dog'
-    BIRD = 3, 'Bird'
-
-
 class Sex(models.IntegerChoices):
     MALE = 1, 'Male'
     FEMALE = 2, 'Female'
     OTHER = 3, 'Other'
 
 
+class Race(models.Model):
+    common_name = models.CharField(max_length=50)
+    scientific_name = models.CharField(max_length=50)
+    is_exotic = models.BooleanField()
+
+    def __str__(self):
+        return f'{self.common_name} ({self.scientific_name})'
+
+
 class Pet(models.Model):
     name = models.CharField(max_length=50)
-    race = models.IntegerField(choices=Race.choices, default=Race.CAT)
+    race = models.ForeignKey(Race, on_delete=models.CASCADE)
     breed = models.CharField(max_length=50)
     birth_date = models.DateField()
     sex = models.IntegerField(choices=Sex.choices, default=Sex.MALE)
@@ -29,7 +31,9 @@ class Pet(models.Model):
 class PetWeight(models.Model):
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
     weight = models.IntegerField()
-    date = models.DateField()
+    date_and_time = models.DateTimeField()
 
     def __str__(self):
-        return f'{self.pet} - {self.weight}g at {self.date}'
+        return f'{self.pet} - {self.weight}g at {self.date_and_time}'
+
+
